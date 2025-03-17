@@ -1,2 +1,2 @@
 # TheShortDark
-The long dark clone :)
+The long dark clone :) (Uncompleted prototype..)
