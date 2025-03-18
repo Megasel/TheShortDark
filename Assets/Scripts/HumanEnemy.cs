@@ -15,6 +15,7 @@ public class HumanEnemy : MonoBehaviour, IDamagable
     private Transform player;
     [SerializeField]private bool isAttacking = false;
     [SerializeField] private ParticleSystem bloodParticles;
+    [SerializeField] private LootContainer lootContainer;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -30,7 +31,7 @@ public class HumanEnemy : MonoBehaviour, IDamagable
     {
         if (player == null || health <= 0)
         {
-            Debug.LogWarning("Игрок не найден! Убедитесь, что у игрока есть тег 'Player'.");
+            //Debug.LogWarning("Игрок не найден! Убедитесь, что у игрока есть тег 'Player'.");
             return;
         }
 
@@ -86,6 +87,7 @@ public class HumanEnemy : MonoBehaviour, IDamagable
         health -= damage;
         if (health <= 0)
         {
+            lootContainer.enabled = true;
             agent.isStopped = true;
             animator.SetTrigger("isDeath");
             Destroy(gameObject, 120);

@@ -31,11 +31,12 @@ public class Lighter : MonoBehaviour
     void Fire()
     {
         RaycastHit hit;
-        Vector3 direction = (transform.position - Camera.main.transform.position).normalized;
+        Vector3 direction = Camera.main.transform.forward; // Используем направление вперед от камеры
+        Ray ray = new Ray(Camera.main.transform.position, direction);
         isProcessing = false;
         IInteractable interactable;
 
-        if (Physics.Raycast(transform.position, direction, out hit) && hit.collider.gameObject.TryGetComponent(out interactable))
+        if (Physics.Raycast(ray, out hit, 10) && hit.collider.gameObject.TryGetComponent(out interactable))
         {
             interactable.Interact();
         }

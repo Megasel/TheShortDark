@@ -5,19 +5,19 @@ using UnityEngine;
 public class OtshelnikTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject othselnikObject;
-    [SerializeField] private Transform othselnikSpawnPoint;
     [SerializeField] private DoorBehavior carDoorBehaviour;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             StartEvent();
+            enabled = false;
         }
     }
     private void StartEvent()
     {
         othselnikObject.SetActive(true);
         carDoorBehaviour.isLocked = false;
-        carDoorBehaviour.OpenDoor();
+        carDoorBehaviour.Open();
     }
 }

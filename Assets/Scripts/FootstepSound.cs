@@ -1,11 +1,12 @@
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FootstepSound : MonoBehaviour
 {
     [Header("Audio Clips for Surfaces")]
-    public AudioClip snowStep;     
-    public AudioClip iceStep;      
-    public AudioClip woodStep;      
+    [SerializeField] private List<GroundSound> groundSounds;   
 
     [SerializeField] private PlayerMoveController moveController;
 
@@ -60,16 +61,19 @@ public class FootstepSound : MonoBehaviour
 
     private AudioClip GetStepClip(string surfaceTag)
     {
-        switch (surfaceTag)
+        foreach (GroundSound groundSound in groundSounds)
         {
-            case "SnowGround":
-                return snowStep;
-            case "Ice":
-                return iceStep;
-            case "Wood":
-                return woodStep;
-            default:
-                return null;
+            if(groundSound.tag.Equals(surfaceTag))
+                return groundSound.audioClip;
+        
+        
         }
+        return null;
     }
+}
+[Serializable]
+class GroundSound
+{
+    public string tag;
+    public AudioClip audioClip;
 }

@@ -121,17 +121,5 @@ public class ItemPicker : MonoBehaviour
         pickedItem = null;
         isPickingAvailable = true;
     }
-    private void OnDrawGizmos()
-    {
-        if (Camera.main == null) return;
-
-        Gizmos.color = Color.green;
-
-        Vector3 rayOrigin = Camera.main.transform.position;
-        Vector3 rayDirection = Camera.main.transform.forward * raycastDistance;
-
-        Gizmos.DrawLine(rayOrigin, rayOrigin + rayDirection);
-
-        Gizmos.DrawSphere(rayOrigin + rayDirection, 0.1f);
-    }
+    
 }

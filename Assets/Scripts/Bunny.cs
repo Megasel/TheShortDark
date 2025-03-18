@@ -86,12 +86,8 @@ public class Bunny : MonoBehaviour, IDamagable
         if (NavMesh.SamplePosition(randomDirection, out hit, idleMoveRange, NavMesh.AllAreas))
         {
             agent.SetDestination(hit.position);
-            Debug.Log("Ќова€ цель дл€ состо€ни€ поко€ установлена: " + hit.position);
         }
-        else
-        {
-            Debug.LogWarning("Ќе удалось найти валидную позицию на NavMesh дл€ состо€ни€ поко€.");
-        }
+       
     }
 
     void UpdateAnimation()
@@ -111,7 +107,6 @@ public class Bunny : MonoBehaviour, IDamagable
         if (other.CompareTag("Player"))
         {
             playerDetected = true;
-            Debug.Log("»грок вошел в зону обнаружени€.");
         }
     }
 
@@ -120,7 +115,6 @@ public class Bunny : MonoBehaviour, IDamagable
         if (other.CompareTag("Player"))
         {
             playerDetected = false;
-            Debug.Log("»грок вышел из зоны обнаружени€.");
         }
     }
 

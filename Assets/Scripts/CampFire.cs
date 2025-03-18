@@ -8,7 +8,7 @@ public class CampFire : MonoBehaviour, IInteractable
     [SerializeField] private VisualEffect fireEffect;
     [SerializeField] private Light fireLight;
     [SerializeField] private int burningTime;
-    [SerializeField] private float temperatureMultiplier = 0.015f;
+    [SerializeField] private float temperatureMultiplier = 0.007f;
     [SerializeField] private Collider warmCollider;
     [SerializeField] private AudioSource aud;
     private Coroutine burningCoroutine;

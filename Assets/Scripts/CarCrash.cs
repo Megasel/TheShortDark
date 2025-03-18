@@ -36,6 +36,7 @@ public class CarCrash : MonoBehaviour
         metrics.SetActive(true);
         Destroy(carUi);
         player.enabled = true;
+        crashedCar.GetComponent<DialogMessages>().StartTalking();
         gameObject.SetActive(false);
     }
 }

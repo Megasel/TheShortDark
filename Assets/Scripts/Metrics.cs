@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public interface IDamagable
 {
@@ -18,14 +19,16 @@ public enum MetricType
 public class Metrics : MonoBehaviour, IDamagable
 {
     [Range(0,1)]public float _health = 1;
-    private float _hunger = 1;
-    private float _water = 1;
-    private float _temperature = 1;
+    [SerializeField][Range(0, 1)]private float _hunger = 1;
+    [SerializeField][Range(0, 1)]private float _water = 1;
+    [SerializeField][Range(0, 1)]private float _temperature = 1;
 
     public float hungerMultiplier;
     public float waterMultiplier;
     public float temperatureMultiplier;
     public float healthDecreaseRate = 0.1f; // Базовая скорость уменьшения здоровья
+
+    [SerializeField] private PlayerMoveController moveController;
 
     [SerializeField] private Image hungerBar;
     [SerializeField] private Image waterBar;
@@ -43,6 +46,8 @@ public class Metrics : MonoBehaviour, IDamagable
     private LiftGammaGain liftGammaGain;
     [SerializeField] private AudioSource aud;
     [SerializeField] private AudioClip takeDamageClip;
+    [SerializeField] private GameObject deathAnimation;
+    private Coroutine deathCoroutine;
     private void Awake()
     {
         volume.profile.TryGet(out dangerEffect);
@@ -104,7 +109,10 @@ public class Metrics : MonoBehaviour, IDamagable
         if (Water <= 0) lowMetricsCount++;
         if (Temperature <= 0) lowMetricsCount++;
 
-        
+        if (Health <= 0 && deathCoroutine== null)
+        {
+            deathCoroutine = StartCoroutine(Death());
+        }
         
             Health -= Time.deltaTime * healthDecreaseRate * lowMetricsCount;
             dangerEffect.size.value = 1 - Health;
@@ -158,5 +166,14 @@ public class Metrics : MonoBehaviour, IDamagable
             return triangleDown;
         
         
+    }
+    private IEnumerator Death()
+    {
+        moveController.camShake.enabled = false;
+
+        moveController.enabled= false;
+        deathAnimation.SetActive(true);
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(1);
     }
 }

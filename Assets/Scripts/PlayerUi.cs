@@ -9,6 +9,7 @@ public class PlayerUi : MonoBehaviour
     [SerializeField] GameObject metrics;
     [SerializeField] private Inventory inventory;
     [SerializeField] private Pause pause;
+    [SerializeField] private GameObject map;
     private GameObject currentPanel;
     bool uiIsActive;
     [SerializeField] PlayerMoveController moveController;
@@ -23,12 +24,17 @@ public class PlayerUi : MonoBehaviour
         if (isUiBlocked) return;
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if(!(inventory.gameObject.activeSelf && inventory.isUsing))
+            if (!(inventory.gameObject.activeSelf && inventory.isUsing))
                 Toggle(inventory.gameObject);
         }
-        else if (Input.GetKeyUp(KeyCode.Escape)) {
+        else if (Input.GetKeyUp(KeyCode.Escape))
+        {
             Toggle(pause.gameObject);
-        
+
+        }
+        else if (Input.GetKeyDown(KeyCode.M) || Input.GetKeyUp(KeyCode.Escape))
+        {
+            Toggle(map.gameObject);
         }
     }
     public void Toggle(GameObject obj)

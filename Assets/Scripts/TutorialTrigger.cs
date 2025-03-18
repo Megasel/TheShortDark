@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class TutorialTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Tutorial tutorial;
+    [SerializeField] private TutorialStepNames tipName;
+    [SerializeField] private int delay;
+    private void OnEnable()
     {
-        
+        tutorial = FindAnyObjectByType<Tutorial>();
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            ShowTip();
+        }
+    }
+    private void ShowTip()
+    {
+        tutorial.ShowTutorialStep(tipName, delay);
+       
     }
 }
