@@ -1,2 +1,2 @@
 # TheShortDark
-The long dark clone :) (Uncompleted prototype..)
+The long dark clone :) Created by VOLGAMES
