@@ -1,4 +1,4 @@
-using System.Collections;
+
 using UnityEngine;
 
 public class FlareGun : MonoBehaviour
@@ -19,13 +19,15 @@ public class FlareGun : MonoBehaviour
     [Header("Weapon Characteristics")]
     [SerializeField] private float aimSpeed = 2f;
     [SerializeField] private float aimingRange = 30f;
-
+    [Header("Helicopter")]
+    [SerializeField] private Helicopter helicopter;
     private bool isAiming = false;
     private bool isShooting = false;
     private Camera cam;
 
     private void OnEnable()
     {
+        helicopter = FindFirstObjectByType<Helicopter>();
         cam = Camera.main;
         moveController = FindObjectOfType<PlayerMoveController>();
         playerAnimationsController = FindObjectOfType<PlayerAnimationsController>();
@@ -84,7 +86,7 @@ public class FlareGun : MonoBehaviour
         aud.PlayOneShot(shotSound);
         isShooting = true;
         handsAnimator.SetTrigger("FlareShot");
-
+        helicopter.StartFly();
 
 
     }

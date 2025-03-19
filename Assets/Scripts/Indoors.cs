@@ -49,7 +49,8 @@ public class Indoors : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(1.5f);
         playerMoveController.MoveInstantly(targetPosition);
         metrics.temperatureMultiplier -= 0.002f;
-        outdoorsAmbientSound.Stop();
+        if(outdoorsAmbientSound != null)
+            outdoorsAmbientSound.Stop();
 
         // Выключаем эффект Vignette
         if (fog != null)
@@ -66,8 +67,8 @@ public class Indoors : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(1.5f);
         metrics.temperatureMultiplier += 0.002f;
         playerMoveController.MoveInstantly(targetPosition);
-        print("!!!");
-        outdoorsAmbientSound.Play();
+        if (outdoorsAmbientSound != null)
+            outdoorsAmbientSound.Play();
 
         // Включаем эффект Vignette
         if (fog != null)

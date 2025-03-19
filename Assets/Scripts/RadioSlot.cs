@@ -4,20 +4,33 @@ using UnityEngine;
 
 public class RadioSlot : MonoBehaviour, IInteractable
 {
+    [SerializeField] private Inventory inventory;
+    [SerializeField] private List<ItemData> details;
+    [SerializeField] private GameObject radioPrefab;
     public void Interact()
     {
-        throw new System.NotImplementedException();
+        int foundedItems = 0;
+        foreach(ItemData detail in details)
+        {
+            foreach(InventoryItem item in inventory.inventoryItems)
+            {
+                if (item != null)
+                {
+
+                    if (detail.prefab.Equals(item.itemData.prefab))
+                    {
+                        foundedItems++;
+                        break;
+                    }
+                }
+            }
+        }
+        if(foundedItems == details.Count)
+        {
+            Instantiate(radioPrefab, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
+
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

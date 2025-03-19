@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,14 +22,14 @@ public class Bunny : MonoBehaviour, IDamagable
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player").transform; 
+        player = GameObject.FindGameObjectWithTag("Player").transform;
 
         agent.speed = runSpeed;
         agent.autoBraking = false;
 
         SetNewIdleTarget();
     }
-
+  
     void Update()
     {
         if (player == null)

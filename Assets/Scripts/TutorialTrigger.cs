@@ -16,6 +16,7 @@ public class TutorialTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             ShowTip();
+            enabled = false;
         }
     }
     private void ShowTip()

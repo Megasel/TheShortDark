@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,7 +25,7 @@ public class Bear : MonoBehaviour, IDamagable
         agent.autoBraking = true;
         Sleep();
     }
-
+ 
     void Update()
     {
         if (player == null || health <= 0)

@@ -16,8 +16,7 @@ public class Heal : ItemData
         Metrics metrics, AudioSource usageAudioSource, Image usingCircleSlider, ItemData selecteditemData)
     {
         float elapsedTime = 0f;
-        if (metrics.Health < 0.99f)
-        {
+        
             inventory.isUsing = true;
 
             if (selecteditemData.animationName != "")
@@ -50,6 +49,6 @@ public class Heal : ItemData
             inventory.DeselectItem();
             inventory.isUsing = false;
             inventory.usingUi.SetActive(false);
-        }
+        
     }
 }
